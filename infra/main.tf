@@ -6,7 +6,7 @@ variable "ambiente" {
 }
 resource "local_file" "ambiente" {
   filename = "${path.module}/ambiente.txt"
-  content = "Ambiente: ${var.ambiente}\nEquipe: NOME-DA-EQUIPE\n"
+  content = "Ambiente: ${var.ambiente}\nEquipe: Grupo 5\n"
 }
 output "arquivo_criado" {
   value = local_file.ambiente.filename

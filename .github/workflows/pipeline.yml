@@ -15,3 +15,21 @@ jobs:
           python-version: "3.12"
       - run: pip install pytest
       - run: pytest
+
+  infraestrutura:
+    needs: testar
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init
+      - run: terraform validate
+      - run: terraform plan
+      - run: terraform apply -auto-approve
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ambiente-criado
+          path: infra/ambiente.txt
